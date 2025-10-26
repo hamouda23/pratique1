@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  node-red:
+  nodered:
     image: nodered/node-red:latest
-    container_name: nodered
+    
     ports:
       - "1880:1880"
     volumes:
@@ -18,7 +18,8 @@ services:
     ports:
       - "9090:9090"
     depends_on:
-      - node-red
+      - nodered
+    restart: unless-stopped
 
   grafana:
     image: grafana/grafana:latest
@@ -31,10 +32,10 @@ services:
     image: influxdb:2.7
     container_name: influxdb
     environment:
-      INFLUXDB_ADMIN_USER: admin
-      INFLUXDB_ADMIN_PASSWORD: admin123
-      INFLUXDB_BUCKET: iot_data
-      INFLUXDB_ORG: my_org
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin123
+      - INFLUXDB_BUCKET=iot_data
+      - INFLUXDB_ORG=my_org
     ports:
       - "8086:8086"
     volumes:
