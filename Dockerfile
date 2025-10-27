@@ -1,14 +1,11 @@
 FROM nodered/node-red:latest
 
-# Définir le répertoire de travail
-WORKDIR /data
+# Installation des modules Node-RED supplémentaires si nécessaire
+RUN npm install node-red-contrib-influxdb
 
-# Ne pas copier tout le dossier data
-# Si tu veux installer des nodes, seulement copier package.json
-# COPY package.json /data
-# RUN npm install --unsafe-perm --no-update-notifier --no-fund --only=production
+# Définition du répertoire de travail
+WORKDIR /usr/src/node-red
 
+# Exposition du port par défaut de Node-RED
 EXPOSE 1880
-
-
 
