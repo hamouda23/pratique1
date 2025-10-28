@@ -23,9 +23,9 @@ services:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
-    depends_on:
-      - node-red
-      - influxdb
+   
+   
+   
     restart: unless-stopped
 
   grafana:
@@ -39,8 +39,8 @@ services:
     volumes:
       - ./grafana/dashboards:/var/lib/grafana/dashboards
       - ./grafana/provisioning:/etc/grafana/provisioning
-    depends_on:
-      - prometheus
+    
+    
     restart: unless-stopped
 
     
