@@ -5,6 +5,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+
+    depends_on:
+      - prometheus
+      - influxdb
     ports:
       - "1880:1880"
     volumes:
