@@ -45,15 +45,16 @@ services:
     ports:
       - "8086:8086"
     volumes:
-      - influxdb_data:/var/lib/influxdb2
+      - influxdb_data:/var/lib/influxdb2  # Corrigez le chemin pour v2
     environment:
-      - DOCKER_INFLUXDB_INIT_MODE=setup
-      - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=
-      - DOCKER_INFLUXDB_INIT_ORG=myorg
-      - DOCKER_INFLUXDB_INIT_BUCKET=mybucket
-      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=mytoken
+      - INFLUXDB_v2_TOKEN=qRFZysV4tibMYwxvG2LO7uJPwo4l4CCI4bbewqAfRpxNyzs3bsobYMY-HDhYdXS_4PeLqYAKQ32POuGLEfnBkQ==  # Token pour l'auth (utilisez-le dans Node-RED)
+      - INFLUXDB_v2_ORG=myorg
+      - INFLUXDB_v2_BUCKET=mybucket
+      - INFLUXDB_v2_ADMIN_USER=my-user
+      - INFLUXDB_v2_ADMIN_PASSWORD=my-password
     restart: unless-stopped
+    
+  
 
 volumes:
   node_red_data:
