@@ -2,12 +2,9 @@ version: '3.8'
 
 services:
   node-red:
-    build:
-      context: .
-      dockerfile: Dockerfile
-
+    image: nodered/node-red:latest
+            
     depends_on:
-      - prometheus
       - influxdb
     ports:
       - "1880:1880"
@@ -16,34 +13,8 @@ services:
     environment:
       - TZ=Europe/Paris
     restart: unless-stopped
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-   
-   
-   
-    restart: unless-stopped
 
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_PROVISIONING_PATH=/etc/grafana/provisioning
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./grafana/dashboards:/var/lib/grafana/dashboards
-      - ./grafana/provisioning:/etc/grafana/provisioning
-    
-    
-    restart: unless-stopped
 
-    
   influxdb:
     image: influxdb:2.7
     ports:
